@@ -13,12 +13,10 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | [U1/Historia_IA](U1/Historia_IA) | Resumen a mano de la historia de la IA (PDF) |
 | [U1/8_Puzzle](U1/8_Puzzle) | Búsquedas no informadas aplicadas al 8-puzzle |
 
-## Cómo ejecutar los programas en Java
+## Unidad 2
 
-Cada proyecto se compila y ejecuta por separado, desde su propia carpeta:
+| Carpeta | Contenido |
+|---|---|
+| [U2/Tarea 4. Regresión Lineal (California Housing)](<U2/Tarea 4. Regresión Lineal (California Housing)>) | Regresión lineal con descenso de gradiente (cuaderno de Jupyter) |
 
-```bash
-cd U1/ArbolBinario    # o U1/8_Puzzle
-javac -d bin src/principal/*.java
-java -cp bin principal.App
-```
+
