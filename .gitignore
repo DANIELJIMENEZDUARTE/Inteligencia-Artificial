@@ -1,2 +1,7 @@
-**/bin/
+# Archivos compilados
+bin/
 *.class
+
+# Archivos del editor
+.vscode/
+.idea/
