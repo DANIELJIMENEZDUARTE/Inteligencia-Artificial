@@ -3,7 +3,7 @@ package principal;
  * Inteligencia Artificial
  * Unidad 1 - Búsquedas no informadas aplicadas al 8-puzzle
  *
- * Alumno: Jiménez Duarte Daniel
+ * Alumno: Daniel Jimenez Duarte
  * No. de control: 23170198
  */
 
@@ -19,16 +19,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Comparator;
 
-/*
- * Las búsquedas no informadas. Todas siguen la misma idea: tener una frontera
- * (nodos por visitar), sacar un nodo, comprobar si es la meta y, si no, meter sus hijos.
- * Lo único que cambia entre ellas es el orden en que la frontera entrega los nodos:
- *
- *   Anchura            -> cola (FIFO): primero el más antiguo
- *   Profundidad        -> pila (LIFO): primero el más reciente
- *   Costo uniforme     -> cola de prioridad: primero el de menor costo
- *   Limitada/Iterativa -> profundidad con un tope de niveles
- */
+/* Implementa búsquedas no informadas para el 8-puzzle. */
 public class Busqueda {
     private final String inicial;
     private final String meta;
@@ -58,7 +49,7 @@ public class Busqueda {
             }
             r.expandidos++;
             for (Nodo hijo : Puzzle.hijos(actual)) {
-                if (visitados.add(hijo.getEstado())) { // add devuelve false si ya estaba
+                if (visitados.add(hijo.getEstado())) {
                     frontera.add(hijo);
                     r.generados++;
                 }
@@ -83,11 +74,9 @@ public class Busqueda {
 
         while (!frontera.isEmpty()) {
             Nodo actual = frontera.poll();
-            // La meta se comprueba al SACAR el nodo (no al generarlo): así se garantiza el camino más barato
             if (actual.getEstado().equals(meta)) {
                 return cerrar(r, actual, t0);
             }
-            // Si ya se encontró un camino más barato a este estado, esta entrada quedó vieja
             if (actual.getCosto() > mejorCosto.get(actual.getEstado())) {
                 continue;
             }
@@ -110,7 +99,7 @@ public class Busqueda {
         Resultado r = nuevo("Primero en profundidad (DFS)");
         long t0 = System.nanoTime();
 
-        Deque<Nodo> frontera = new ArrayDeque<>(); // se usa como pila: push / pop
+        Deque<Nodo> frontera = new ArrayDeque<>();
         Set<String> visitados = new HashSet<>();
         Nodo raiz = new Nodo(inicial, null);
         frontera.push(raiz);
@@ -156,8 +145,7 @@ public class Busqueda {
 
         Contadores c = new Contadores();
         Nodo encontrado = null;
-        // Repite la búsqueda limitada con límite 0, 1, 2... hasta hallar la meta.
-        // El 8-puzzle se resuelve como máximo en 31 movimientos.
+        // Aumenta el límite hasta hallar la meta.
         for (int limite = 0; limite <= 31 && encontrado == null; limite++) {
             encontrado = limitada(new Nodo(inicial, null), limite, new HashMap<>(), c);
         }
@@ -167,23 +155,18 @@ public class Busqueda {
         return cerrar(r, encontrado, t0);
     }
 
-    /*
-     * Núcleo recursivo de la búsqueda limitada.
-     * 'vistos' recuerda a qué profundidad se llegó a cada estado: solo se vuelve a explorar
-     * un estado si ahora se llega a él con menos profundidad (más margen restante). Esto evita
-     * ciclos sin perder soluciones dentro del límite.
-     */
+    // Búsqueda recursiva con límite.
     private Nodo limitada(Nodo actual, int limite, Map<String, Integer> vistos, Contadores c) {
         c.maxNiveles = Math.max(c.maxNiveles, actual.getProfundidad() + 1);
         if (actual.getEstado().equals(meta)) {
             return actual;
         }
         if (actual.getProfundidad() >= limite) {
-            return null; // corte por límite
+            return null;
         }
         Integer previo = vistos.get(actual.getEstado());
         if (previo != null && previo <= actual.getProfundidad()) {
-            return null; // ya se exploró desde un nivel igual o más alto
+            return null;
         }
         vistos.put(actual.getEstado(), actual.getProfundidad());
         c.expandidos++;
@@ -199,11 +182,7 @@ public class Busqueda {
     }
 
     // ------------------------------------------------------------ Bidireccional
-    /*
-     * Dos búsquedas en anchura: una desde el estado inicial y otra desde el objetivo.
-     * Se detiene cuando alguna genera un estado que la otra ya había visitado.
-     * Funciona porque cada movimiento se puede deshacer (los operadores son reversibles).
-     */
+    /* Busca desde el inicio y la meta al mismo tiempo. */
     public Resultado bidireccional() {
         Resultado r = nuevo("Bidireccional (opcional)");
         long t0 = System.nanoTime();
@@ -212,7 +191,7 @@ public class Busqueda {
             r.encontrada = true;
             r.ruta = new ArrayList<>(List.of(inicial));
             r.generados = 1;
-            r.milisegundos = (System.nanoTime() - t0) / 1_000_000;
+            r.milisegundos = (System.nanoTime() - t0) / 1_000_000.0;
             return r;
         }
 
@@ -230,7 +209,6 @@ public class Busqueda {
         r.generados = 2;
 
         while (!colaInicio.isEmpty() && !colaMeta.isEmpty()) {
-            // Se expande un nivel completo de la frontera más pequeña
             boolean avanzaInicio = colaInicio.size() <= colaMeta.size();
             Deque<Nodo> cola = avanzaInicio ? colaInicio : colaMeta;
             Map<String, Nodo> propios = avanzaInicio ? desdeInicio : desdeMeta;
@@ -254,21 +232,20 @@ public class Busqueda {
                         Nodo delaMeta = avanzaInicio ? encuentro : hijo;
                         r.encontrada = true;
                         r.ruta = unirRutas(delInicio, delaMeta);
-                        r.milisegundos = (System.nanoTime() - t0) / 1_000_000;
+                        r.milisegundos = (System.nanoTime() - t0) / 1_000_000.0;
                         return r;
                     }
                 }
             }
             r.maxFrontera = Math.max(r.maxFrontera, desdeInicio.size() + desdeMeta.size());
         }
-        r.milisegundos = (System.nanoTime() - t0) / 1_000_000;
+        r.milisegundos = (System.nanoTime() - t0) / 1_000_000.0;
         return r;
     }
 
-    // Une la mitad del inicio con la mitad de la meta (ambos nodos tienen el mismo estado)
+    // Une las dos rutas.
     private List<String> unirRutas(Nodo delInicio, Nodo delaMeta) {
         List<String> ruta = rutaDesdeRaiz(delInicio);
-        // De la mitad de la meta se recorre hacia arriba: ya va en dirección a la meta
         for (Nodo n = delaMeta.getPadre(); n != null; n = n.getPadre()) {
             ruta.add(n.getEstado());
         }
@@ -283,7 +260,7 @@ public class Busqueda {
     }
 
     private Resultado cerrar(Resultado r, Nodo nodoMeta, long t0) {
-        r.milisegundos = (System.nanoTime() - t0) / 1_000_000;
+        r.milisegundos = (System.nanoTime() - t0) / 1_000_000.0;
         if (nodoMeta != null) {
             r.encontrada = true;
             r.ruta = rutaDesdeRaiz(nodoMeta);
@@ -291,7 +268,7 @@ public class Busqueda {
         return r;
     }
 
-    // Sigue la cadena de padres desde la meta hasta la raíz y la invierte
+    // Reconstruye la ruta.
     private List<String> rutaDesdeRaiz(Nodo nodo) {
         List<String> ruta = new ArrayList<>();
         for (Nodo n = nodo; n != null; n = n.getPadre()) {
@@ -301,7 +278,7 @@ public class Busqueda {
         return ruta;
     }
 
-    // Contadores compartidos entre las llamadas recursivas
+    // Contadores de la búsqueda.
     private static class Contadores {
         long expandidos;
         long generados;

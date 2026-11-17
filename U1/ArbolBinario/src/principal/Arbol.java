@@ -1,33 +1,34 @@
 package principal;
 
+/*
+ * Inteligencia Artificial
+ * Unidad 1 - Árbol binario de búsqueda
+ * Alumno: Daniel Jimenez Duarte
+ * No. de control: 23170198
+ */
+
 public class Arbol {
 
-    private Nodo raiz; // Punto de entrada al árbol. Vale null cuando el árbol está vacío
- 
+    private Nodo raiz; // Raíz del árbol.
+
     public Arbol() {
         this.raiz = null;
     }
- 
+
     public boolean vacio() {
         return raiz == null;
     }
- 
-    // Devuelve el nodo que contiene el nombre indicado, o null si no se encuentra en el árbol
+
+    // Busca un nombre en el árbol.
     public Nodo buscarNodo(String nombre) {
         return buscar(raiz, nombre);
     }
- 
-    /*
-     * Búsqueda recursiva propia del árbol binario de búsqueda.
-     * En cada paso compara el nombre con el del nodo actual y continúa únicamente
-     * por el subárbol donde podría encontrarse, descartando el otro por completo
-     */
+
+    // Compara y continúa por el subárbol correspondiente.
     private Nodo buscar(Nodo actual, String nombre) {
         if (actual == null) {
             return null;
         }
-        // compareTo compara los nombres según el orden de sus caracteres, por eso distingue mayúsculas de minúsculas.
-        // Devuelve un valor negativo si el nombre precede al del nodo, cero si son iguales y positivo si lo sucede
         int comparacion = nombre.compareTo(actual.getNombre());
         if (comparacion == 0) {
             return actual;
@@ -37,15 +38,12 @@ public class Arbol {
         }
         return buscar(actual.getDerecho(), nombre);
     }
- 
+
     public void insertar(String nombre) {
         raiz = insertar(raiz, nombre);
     }
- 
-    /*
-     * Desciende recursivamente hasta encontrar una posición vacía y ahí crea el nodo nuevo.
-     * Devuelve el nodo actual para que su padre conserve la referencia a él al regresar de la recursión
-     */
+
+    // Inserta el nombre en su posición ordenada.
     private Nodo insertar(Nodo actual, String nombre) {
         if (actual == null) {
             return new Nodo(nombre);
@@ -56,10 +54,9 @@ public class Arbol {
         } else if (comparacion > 0) {
             actual.setDerecho(insertar(actual.getDerecho(), nombre));
         }
-        // Un nombre repetido no se inserta, por lo que el árbol permanece igual
         return actual;
     }
- 
+
     public Nodo getRaiz() {
         return raiz;
     }

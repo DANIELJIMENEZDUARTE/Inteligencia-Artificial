@@ -3,20 +3,16 @@ package principal;
  * Inteligencia Artificial
  * Unidad 1 - Búsquedas no informadas aplicadas al 8-puzzle
  *
- * Alumno: Jiménez Duarte Daniel
+ * Alumno: Daniel Jimenez Duarte
  * No. de control: 23170198
  */
 
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Programa principal. Ejecuta las cinco búsquedas obligatorias y la bidireccional (opcional)
- * sobre el mismo estado inicial y objetivo, y al final imprime una tabla para compararlas.
- */
+/* Ejecuta las búsquedas y muestra sus resultados. */
 public class App {
-    // El tablero se escribe por renglones; el espacio en blanco es el hueco.
-    // CAMBIA ESTOS DOS VALORES por los que pida tu actividad.
+    // El espacio representa el hueco.
     private static final String ESTADO_INICIAL = "7621 3458";
     private static final String ESTADO_META = "12345678 ";
     private static final int LIMITE_PROFUNDIDAD = 20;
@@ -52,13 +48,13 @@ public class App {
         imprimirTabla(resultados);
     }
 
-    // Tabla resumen: sirve de base para la tabla comparativa del entregable
+    // Imprime los resultados.
     private static void imprimirTabla(List<Resultado> resultados) {
         System.out.println("================== TABLA RESUMEN ==================");
-        System.out.printf("%-38s %-6s %-6s %-11s %-11s %-11s %-6s%n",
+        System.out.printf("%-38s %-6s %-6s %-11s %-11s %-11s %-10s%n",
                 "Búsqueda", "Sol.", "Costo", "Expandidos", "Generados", "Memoria", "ms");
         for (Resultado r : resultados) {
-            System.out.printf("%-38s %-6s %-6s %-11d %-11d %-11d %-6d%n",
+            System.out.printf("%-38s %-6s %-6s %-11d %-11d %-11d %-10.3f%n",
                     r.algoritmo,
                     r.encontrada ? "sí" : "no",
                     r.encontrada ? String.valueOf(r.pasos()) : "-",

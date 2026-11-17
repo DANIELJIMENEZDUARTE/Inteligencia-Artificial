@@ -10,34 +10,34 @@ package principal;
 public class App {
     public static void main(String[] args) throws Exception {
         Arbol arbol = new Arbol();
- 
+
         System.out.println("Árbol recién creado");
         System.out.println("¿Está vacío? " + arbol.vacio());
- 
-        // El primer nombre se convierte en la raíz y cada uno de los siguientes se ubica según el orden del árbol
+
+        // Inserta los nombres.
         String[] nombres = { "Daniel", "Miriam", "Angel", "Luigi", "German", "Evelyn" };
         for (String nombre : nombres) {
             arbol.insertar(nombre);
         }
- 
+
         System.out.println();
         System.out.println("Después de insertar " + nombres.length + " nombres");
         System.out.println("¿Está vacío? " + arbol.vacio());
         System.out.println("Nodo raíz: " + arbol.getRaiz().getNombre());
- 
-        // Si el árbol está bien construido, el recorrido en orden muestra los nombres de menor a mayor
+
+        // Muestra los nombres ordenados.
         System.out.print("Recorrido en orden: ");
         enOrden(arbol.getRaiz());
         System.out.println();
- 
-        // Casos de prueba con un nodo interno, una hoja y un nombre que no existe en el árbol
+
+        // Prueba nombres existentes y uno inexistente.
         System.out.println();
         System.out.println("Pruebas de buscarNodo");
         buscar(arbol, "German");
         buscar(arbol, "Evelyn");
         buscar(arbol, "Luis");
     }
- 
+
     private static void buscar(Arbol arbol, String nombre) {
         Nodo encontrado = arbol.buscarNodo(nombre);
         if (encontrado == null) {
@@ -48,19 +48,16 @@ public class App {
                     + textoHijo(encontrado.getDerecho()));
         }
     }
- 
-    // Entrega el nombre del hijo, o un guion cuando ese hijo no existe
+
+    // Muestra un hijo o un guion.
     private static String textoHijo(Nodo hijo) {
         if (hijo == null) {
             return "-";
         }
         return hijo.getNombre();
     }
- 
-    /*
-     * Recorrido en orden. Visita el subárbol izquierdo, después el nodo actual y al final
-     * el subárbol derecho, de modo que los nombres aparecen de menor a mayor
-     */
+
+    // Recorre izquierda, nodo y derecha.
     private static void enOrden(Nodo actual) {
         if (actual == null) {
             return;
@@ -70,4 +67,3 @@ public class App {
         enOrden(actual.getDerecho());
     }
 }
-

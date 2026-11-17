@@ -4,16 +4,13 @@ package principal;
  * Inteligencia Artificial
  * Unidad 1 - Búsquedas no informadas aplicadas al 8-puzzle
  *
- * Alumno: Jiménez Duarte Daniel
+ * Alumno: Daniel Jimenez Duarte
  * No. de control: 23170198
  */
 
 import java.util.List;
 
-/*
- * Resultado de una búsqueda: la ruta encontrada y sus datos estadísticos.
- * Son los datos que se comparan en la tabla comparativa del entregable.
- */
+/* Guarda la ruta y las estadísticas de una búsqueda. */
 public class Resultado {
     private static final int MAX_PASOS_A_IMPRIMIR = 40;
 
@@ -23,7 +20,7 @@ public class Resultado {
     long expandidos;        // Nodos a los que se les generaron hijos
     long generados;         // Nodos creados en total
     long maxFrontera;       // Máximo de nodos guardados a la vez (memoria usada)
-    long milisegundos;      // Tiempo de ejecución
+    double milisegundos;    // Tiempo de ejecución
 
     public int pasos() {
         return ruta == null ? 0 : ruta.size() - 1;
@@ -51,7 +48,7 @@ public class Resultado {
         System.out.println("Nodos expandidos    : " + expandidos);
         System.out.println("Nodos generados     : " + generados);
         System.out.println("Máx. nodos en memoria: " + maxFrontera);
-        System.out.println("Tiempo              : " + milisegundos + " ms");
+        System.out.printf("Tiempo              : %.3f ms%n", milisegundos);
         System.out.println();
     }
 }

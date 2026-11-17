@@ -1,18 +1,21 @@
-## Getting Started
+# Árbol binario de búsqueda
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Programa de la Unidad 1 para insertar y buscar nombres en un árbol binario de
+búsqueda.
 
-## Folder Structure
+## Funciones
 
-The workspace contains two folders by default, where:
+- Inserción recursiva.
+- Búsqueda recursiva.
+- Recorrido en orden.
+- Pruebas con nombres existentes e inexistentes.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Ejecución
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+```bash
+javac -d bin src/principal/*.java
+java -cp bin principal.App
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+El código fuente está en `src/principal`. La carpeta `bin` contiene únicamente
+salidas compiladas locales y no forma parte del código entregable.
