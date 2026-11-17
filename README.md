@@ -13,6 +13,7 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | [U1/Historia_IA](U1/Historia_IA) | Resumen a mano de la historia de la IA (PDF) |
 | [U1/8_Puzzle](U1/8_Puzzle) | Búsquedas no informadas aplicadas al 8-puzzle |
 
+<<<<<<< HEAD
 ## Unidad 2
 
 | Carpeta | Contenido |
@@ -20,3 +21,5 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | [U2/Tarea 4. Regresión Lineal (California Housing)](<U2/Tarea 4. Regresión Lineal (California Housing)>) | Regresión lineal con descenso de gradiente (cuaderno de Jupyter) |
 
 
+=======
+>>>>>>> 804c1fb1a0a376460698d85dc6a562f0a711fcab
