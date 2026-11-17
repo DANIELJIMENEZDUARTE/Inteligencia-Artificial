@@ -1,4 +1,4 @@
-package principal;
+package principal_8_puzzle;
 /*
  * Inteligencia Artificial
  * Unidad 1 - Búsquedas no informadas aplicadas al 8-puzzle
@@ -6,6 +6,7 @@ package principal;
  * Alumno: Daniel Jimenez Duarte
  * No. de control: 23170198
  */
+
 
 /* Guarda un estado y su ruta de búsqueda. */
 public class Nodo {

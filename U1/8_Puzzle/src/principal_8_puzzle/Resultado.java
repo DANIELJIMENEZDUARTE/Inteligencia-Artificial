@@ -1,4 +1,4 @@
-package principal;
+package principal_8_puzzle;
 
 /*
  * Inteligencia Artificial

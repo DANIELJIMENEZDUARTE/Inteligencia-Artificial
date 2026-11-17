@@ -18,6 +18,10 @@ public class Nodo {
         this.derecho = null;
     }
 
+    public Nodo(String inicial, Object object) {
+        //TODO Auto-generated constructor stub
+    }
+
     public String getNombre() {
         return nombre;
     }
