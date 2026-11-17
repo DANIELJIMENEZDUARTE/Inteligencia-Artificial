@@ -19,7 +19,8 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | Carpeta | Contenido |
 |---|---|
 | [U2/Tarea 4. Regresión Lineal (California Housing)](<U2/Tarea 4. Regresión Lineal (California Housing)>) | Regresión lineal con descenso de gradiente (cuaderno de Jupyter) |
+| [U2/Tarea 5. Ejemplo de Perceptrón (Python)](<U2/Tarea 5. Ejemplo de Perceptrón (Python)>) | Perceptrón, funciones de activación y neurona lineal (cuaderno de Jupyter) |
 
 
-=======
->>>>>>> 804c1fb1a0a376460698d85dc6a562f0a711fcab
+
+
