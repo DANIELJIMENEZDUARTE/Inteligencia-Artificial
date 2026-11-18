@@ -21,6 +21,11 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | [U2/Ejemplo de Perceptrón](<U2/Ejemplo de Perceptrón>) | Perceptrón, funciones de activación y neurona lineal |
 | [U2/dataset rostros](<U2/dataset rostros>) | Dataset propio de rostros: programas para capturar y recortar fotos |
 
+## Unidad 3
+
+| Carpeta | Contenido |
+|---|---|
+| [U3/Digitos 0-9](<U3/Digitos 0-9>) | Reconocimiento de digitos del 0-9 |
 
 
 
