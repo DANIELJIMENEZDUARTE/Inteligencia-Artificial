@@ -26,6 +26,8 @@ Tareas de la materia de Fundamentos de Inteligencia Artificial.
 | Carpeta | Contenido |
 |---|---|
 | [U3/Digitos 0-9](<U3/Digitos 0-9>) | Reconocimiento de digitos del 0-9 |
+| [U3/CNN Clasificación rostros](<U3/CNN Clasificación rostros>) | Reconocimiento de digitos del 0-9 |
+
 
 
 
